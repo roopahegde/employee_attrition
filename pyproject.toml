@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39"]
+include = '\.pyi?$'
+
+[project]
+name = "employee_attrition_model"
+version = "0.1.0"
+description = "A model to predict employee attrition"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+python_classes = "Test*"
+addopts = "--cov=src --cov-report=term-missing"
