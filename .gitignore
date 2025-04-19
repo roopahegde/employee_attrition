@@ -1,0 +1,29 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Python package build directories
+*.egg-info/
+*.egg-info/
+dist/
+build/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution files
+*.whl
+*.tar.gz
+
+# Logs
+*.log
+
+# Config files
+*.cfg
+
+# ignore pickle files
+*.pkl
+
