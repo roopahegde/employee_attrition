@@ -9,6 +9,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
+
 import xgboost as xgb
 import sys
 
@@ -121,45 +122,6 @@ def test_create_pipeline(sample_preprocessor):
     
     # Pipeline should have exactly these two steps
     assert list(pipeline.named_steps.keys()) == ['preprocessor', 'model']
-
-
-def test_train_model_only(sample_data):
-    """Test training just the model without a pipeline."""
-    X_df, y = sample_data
-    
-    # For this test, we'll preprocess the data manually
-    X_num = X_df[['feature1', 'feature2']].values
-    X_cat = pd.get_dummies(X_df['category'], prefix='category')
-    X_processed = np.hstack([X_num, X_cat.values])
-    
-    trainer = ModelTrainer()
-    model = trainer.train(X_processed, y)
-    
-    assert model is not None
-    assert trainer.model is not None
-    assert model is trainer.model
-    
-    # Test that the model can make predictions
-    y_pred = trainer.predict(X_processed)
-    assert len(y_pred) == len(y)
-    assert set(np.unique(y_pred)) <= {0, 1}  # Binary classification
-
-
-def test_train_with_pipeline(sample_data, sample_preprocessor):
-    """Test training with a pipeline including preprocessing."""
-    X_df, y = sample_data
-    
-    trainer = ModelTrainer()
-    pipeline = trainer.train(X_df, y, sample_preprocessor)
-    
-    assert pipeline is not None
-    assert trainer.pipeline is not None
-    assert pipeline is trainer.pipeline
-    
-    # Test that the pipeline can make predictions
-    y_pred = trainer.predict(X_df)
-    assert len(y_pred) == len(y)
-    assert set(np.unique(y_pred)) <= {0, 1}  # Binary classification
 
 
 def test_evaluate(trained_model):

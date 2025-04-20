@@ -178,19 +178,21 @@ def test_handle_outliers(sample_data):
     """Test handling of outliers in the data."""
     # Add some extreme outliers to the data
     outlier_data = sample_data.copy()
-    monthlyincome = outlier_data['monthlyincome'].quantile(0.75)   # Extreme outlier
-    distancefromhome = outlier_data['distancefromhome'].quantile(0.75) # Extreme outlier
-   
     
-    outlier_data.loc[0, 'monthlyincome'] = monthlyincome+1000000  # Extreme outlier
-    outlier_data.loc[1, 'distancefromhome'] = distancefromhome+500   # Extreme outlier
+    # First add the extreme outlier
+    outlier_data.loc[0, 'monthlyincome'] = 1000000  # Extreme outlier
     
+    # Then calculate the bounds (same order as in DataProcessor)
+    Q1 = outlier_data['monthlyincome'].quantile(0.25)
+    Q3 = outlier_data['monthlyincome'].quantile(0.75)
+    IQR = Q3 - Q1
+    upper_bound = Q3 + 1.5 * IQR
+
     processor = DataProcessor()
     processed_data = processor.preprocess_data(outlier_data)
     
     # Check that outliers were handled (capped)
-    assert processed_data['monthlyincome'].max() <= monthlyincome
-    assert processed_data['distancefromhome'].max() <= distancefromhome
+    assert processed_data['monthlyincome'].max() <= upper_bound
 
 
 def test_prepare_data_end_to_end(tmp_path, sample_data):

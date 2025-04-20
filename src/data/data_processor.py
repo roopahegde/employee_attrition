@@ -56,7 +56,7 @@ class DataProcessor:
             pandas.DataFrame: Preprocessed dataset.
         """
         # Create a copy to avoid modifying the original dataframe
-        df_processed = df.copy()
+        df_processed = df.copy()        
         
         # Drop unnecessary columns
         if self.drop_columns:
@@ -72,7 +72,7 @@ class DataProcessor:
                     df_processed[col] = df_processed[col].fillna(df_processed[col].median())
         
         # Handle outliers (capping based on IQR)
-        numerical_columns = df_processed.select_dtypes(include=['int64', 'float64']).columns.tolist()
+        numerical_columns = df_processed.select_dtypes(include=['int32','int64', 'float64']).columns.tolist()
         numerical_columns = [col for col in numerical_columns if col != self.target_column]
         
         for col in numerical_columns:
@@ -80,10 +80,14 @@ class DataProcessor:
             Q3 = df_processed[col].quantile(0.75)
             IQR = Q3 - Q1
             lower_bound = Q1 - 1.5 * IQR
-            upper_bound = Q3 + 1.5 * IQR
-            
+            upper_bound = Q3 + 1.5 * IQR           
+
             df_processed[col] = np.where(df_processed[col] < lower_bound, lower_bound, df_processed[col])
             df_processed[col] = np.where(df_processed[col] > upper_bound, upper_bound, df_processed[col])
+
+            if(col == 'monthlyincome'):
+                print("upper_bound -- ", upper_bound)
+                print(df_processed['monthlyincome'].max())
         
         # Convert target column to binary (0/1)
         if self.target_column in df_processed.columns:
