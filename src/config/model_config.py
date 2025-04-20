@@ -25,7 +25,6 @@ XGBOOST_PARAMS = {
     "n_estimators": 100,
     "objective": "binary:logistic",
     "eval_metric": "auc",
-    "use_label_encoder": False,
     "random_state": 42
 }
 
