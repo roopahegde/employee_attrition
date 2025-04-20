@@ -28,15 +28,53 @@ def sample_data():
     np.random.seed(42)
     n_samples = 200
     
-    # Create a simple dataset with one categorical and one numerical feature
-    X_num = np.random.rand(n_samples, 2)  # Two numerical features
-    X_cat = np.random.choice(['A', 'B', 'C'], size=(n_samples, 1))  # One categorical feature
+    # Create sample data matching EmployeeData schema
+    data = {
+        'age': np.random.randint(18, 60, n_samples),
+        'businesstravel': np.random.choice(['Travel_Rarely', 'Travel_Frequently', 'Non-Travel'], n_samples),
+        'dailyrate': np.random.randint(100, 1500, n_samples),
+        'department': np.random.choice(['Sales', 'Research & Development', 'Human Resources'], n_samples),
+        'distancefromhome': np.random.randint(1, 30, n_samples),
+        'education': np.random.randint(1, 5, n_samples),
+        'educationfield': np.random.choice(['Life Sciences', 'Medical', 'Marketing', 'Technical Degree', 'Human Resources', 'Other'], n_samples),
+        'employeecount': np.ones(n_samples, dtype=int),
+        'employeenumber': np.arange(1, n_samples + 1),
+        'environmentsatisfaction': np.random.randint(1, 5, n_samples),
+        'gender': np.random.choice(['Male', 'Female'], n_samples),
+        'hourlyrate': np.random.randint(30, 100, n_samples),
+        'jobinvolvement': np.random.randint(1, 5, n_samples),
+        'joblevel': np.random.randint(1, 6, n_samples),
+        'jobrole': np.random.choice([
+            'Sales Executive', 'Research Scientist', 'Laboratory Technician',
+            'Manufacturing Director', 'Healthcare Representative', 'Manager',
+            'Sales Representative', 'Research Director', 'Human Resources'
+        ], n_samples),
+        'jobsatisfaction': np.random.randint(1, 5, n_samples),
+        'maritalstatus': np.random.choice(['Single', 'Married', 'Divorced'], n_samples),
+        'monthlyincome': np.random.randint(2000, 20000, n_samples),
+        'monthlyrate': np.random.randint(5000, 25000, n_samples),
+        'numcompaniesworked': np.random.randint(0, 8, n_samples),
+        'over18': np.full(n_samples, 'Y'),
+        'overtime': np.random.choice(['Yes', 'No'], n_samples),
+        'percentsalaryhike': np.random.randint(0, 25, n_samples),
+        'performancerating': np.random.randint(1, 5, n_samples),
+        'relationshipsatisfaction': np.random.randint(1, 5, n_samples),
+        'standardhours': np.full(n_samples, 80),
+        'stockoptionlevel': np.random.randint(0, 4, n_samples),
+        'totalworkingyears': np.random.randint(0, 40, n_samples),
+        'trainingtimeslastyear': np.random.randint(0, 6, n_samples),
+        'worklifebalance': np.random.randint(1, 5, n_samples),
+        'yearsatcompany': np.random.randint(0, 20, n_samples),
+        'yearsincurrentrole': np.random.randint(0, 15, n_samples),
+        'yearssincelastpromotion': np.random.randint(0, 15, n_samples),
+        'yearswithcurrmanager': np.random.randint(0, 15, n_samples)
+    }
     
-    X = np.hstack([X_num, X_cat])
-    y = (X_num[:, 0] + X_num[:, 1] > 1).astype(int)  # Simple decision boundary
+    X_df = pd.DataFrame(data)
     
-    # Convert to pandas DataFrame
-    X_df = pd.DataFrame(X, columns=['feature1', 'feature2', 'category'])
+    # Create target variable (simple rule for testing)
+    y = ((X_df['monthlyincome'] > 10000) & 
+         (X_df['totalworkingyears'] > 10)).astype(int)
     
     return X_df, pd.Series(y)
 
@@ -46,8 +84,17 @@ def sample_preprocessor(sample_data):
     """Create a sample preprocessor for testing."""
     X_df, _ = sample_data
     
-    numerical_cols = ['feature1', 'feature2']
-    categorical_cols = ['category']
+    numerical_cols = [
+        'age', 'dailyrate', 'distancefromhome', 'hourlyrate', 'monthlyincome',
+        'monthlyrate', 'numcompaniesworked', 'percentsalaryhike', 'totalworkingyears',
+        'yearsatcompany', 'yearsincurrentrole', 'yearssincelastpromotion',
+        'yearswithcurrmanager'
+    ]
+    
+    categorical_cols = [
+        'businesstravel', 'department', 'educationfield', 'gender',
+        'jobrole', 'maritalstatus', 'overtime'
+    ]
     
     numerical_transformer = Pipeline(steps=[
         ('imputer', SimpleImputer(strategy='median')),
