@@ -9,7 +9,7 @@ import os
 # Add the project root directory to Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.utils.validation import EmployeeData, EmployeeBatchData, validate_input
+from employee_attrition_model.utils.validation import EmployeeData, EmployeeBatchData, validate_input
 
 
 def test_employee_data_validation_valid():

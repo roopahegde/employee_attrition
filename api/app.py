@@ -43,13 +43,6 @@ class BatchPredictionResponse(BaseModel):
     """
     predictions: List[PredictionResponse]
 
-# Initialize FastAPI app
-app = FastAPI(
-    title="Employee Attrition Predictor API",
-    description="API for predicting employee attrition using machine learning",
-    version="0.1.0"
-)
-
 # Health check endpoint
 @app.get("/health")
 async def health_check():
@@ -59,7 +52,7 @@ async def health_check():
 # Initialize the model trainer and load the model
 try:
     model_trainer = ModelTrainer()
-    model_trainer.load_model(filepath = MODEL_PATH)
+    model_trainer.load_model()
     logger.info("Model loaded successfully")
 except Exception as e:
     logger.error(f"Error loading model: {str(e)}")
@@ -129,4 +122,4 @@ async def predict_batch(batch_data: EmployeeBatchData):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)

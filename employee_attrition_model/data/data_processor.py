@@ -9,7 +9,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
 
-from src.config.model_config import DATA_PROCESSING
+from employee_attrition_model.config.model_config import DATA_PROCESSING
 
 
 class DataProcessor:

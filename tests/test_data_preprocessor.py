@@ -12,8 +12,8 @@ import sys
 # Add the project root directory to Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.data.data_processor import DataProcessor
-from src.config.model_config import DATA_PROCESSING
+from employee_attrition_model.data.data_processor import DataProcessor
+from employee_attrition_model.config.model_config import DATA_PROCESSING
 
 
 @pytest.fixture

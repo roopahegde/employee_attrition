@@ -17,9 +17,9 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
-from src.models.model_trainer import ModelTrainer
-from src.config.model_config import XGBOOST_PARAMS
-from src.utils.validation import EmployeeData
+from employee_attrition_model.models.model_trainer import ModelTrainer
+from employee_attrition_model.config.model_config import XGBOOST_PARAMS
+from employee_attrition_model.utils.validation import EmployeeData
 
 
 @pytest.fixture
