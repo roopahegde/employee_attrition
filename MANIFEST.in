@@ -1,0 +1,12 @@
+include README.md
+include LICENSE
+include ./requirements.txt
+recursive-include ./employee_attrition_model
+
+recursive-include employee_attrition_model/config *
+recursive-include employee_attrition_model/data *
+recursive-include employee_attrition_model/models *
+recursive-include employee_attrition_model/utils *
+recursive-include employee_attrition_model/trained_models *
+recursive-include employee_attrition_model *.py
+

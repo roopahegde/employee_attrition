@@ -29,7 +29,7 @@ XGBOOST_PARAMS = {
 }
 
 # Paths
-MODEL_PATH = "models/xgboost_attrition_model.joblib"
+MODEL_PATH = "trained_models/employee_attrition_model.joblib"
 DATA_PATH = "data/wa_fn_usec_hr_employee_attrition_tsv.csv"
 
 # Evaluation settings

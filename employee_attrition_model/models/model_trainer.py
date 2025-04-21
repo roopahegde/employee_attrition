@@ -8,7 +8,7 @@ from sklearn.pipeline import Pipeline
 import xgboost as xgb
 from sklearn.model_selection import cross_val_score
 
-from src.config.model_config import XGBOOST_PARAMS, MODEL_PATH
+from employee_attrition_model.config.model_config import XGBOOST_PARAMS, MODEL_PATH
 
 
 class ModelTrainer:
@@ -105,7 +105,7 @@ class ModelTrainer:
             raise ValueError("Model has not been trained yet.")
         
         # Import here to avoid circular imports
-        from src.utils.evaluation import calculate_metrics
+        from employee_attrition_model.utils.evaluation import calculate_metrics
         
         return calculate_metrics(y_test, y_pred, y_pred_proba)
     
@@ -172,6 +172,9 @@ class ModelTrainer:
         if filepath is None:
             filepath = MODEL_PATH
             
+        # Print the filepath for debugging
+        print(f"Attempting to load model from: {filepath}")
+        
         if os.path.exists(filepath):
             loaded_model = joblib.load(filepath)
             
@@ -198,7 +201,7 @@ class ModelTrainer:
             numpy.ndarray: Predicted classes.
         """
         # Import here to avoid circular imports
-        from src.utils.validation import validate_input
+        from employee_attrition_model.utils.validation import validate_input
         import pandas as pd
         
         try:
@@ -241,7 +244,7 @@ class ModelTrainer:
             numpy.ndarray: Predicted probabilities.
         """
         # Import here to avoid circular imports
-        from src.utils.validation import validate_input
+        from employee_attrition_model.utils.validation import validate_input
         import pandas as pd
         
         try:

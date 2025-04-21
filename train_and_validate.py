@@ -10,10 +10,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from src.config.model_config import DATA_PATH
-from src.data.data_processor import DataProcessor
-from src.models.model_trainer import ModelTrainer
-from src.utils.evaluation import print_metrics, plot_confusion_matrix, print_classification_report, plot_feature_importance
+from employee_attrition_model.config.model_config import DATA_PATH
+from employee_attrition_model.data.data_processor import DataProcessor
+from employee_attrition_model.models.model_trainer import ModelTrainer
+from employee_attrition_model.utils.evaluation import print_metrics, plot_confusion_matrix, print_classification_report, plot_feature_importance
 
 def main():
     # Make sure the models directory exists
@@ -61,7 +61,7 @@ def main():
     
     # 4. Save the model
     print("\n4. Saving model...")
-    model_path = os.path.join('models', 'employee_attrition_model.joblib')
+    model_path = os.path.join('employee_attrition_model\\trained_models', 'employee_attrition_model.joblib')
     model_trainer.save_model(model_path)
     print(f"Model saved to {model_path}")
     

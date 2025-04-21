@@ -2,6 +2,7 @@
 .venv/
 venv/
 env/
+ENV/
 
 # Python package build directories
 *.egg-info/
@@ -13,6 +14,8 @@ build/
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
+.Python
 
 # Distribution files
 *.whl
@@ -26,4 +29,13 @@ __pycache__/
 
 # ignore pickle files
 *.pkl
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Misc
+.DS_Store
 
