@@ -171,6 +171,9 @@ class ModelTrainer:
         """
         if filepath is None:
             filepath = os.path.join('employee_attrition_model', MODEL_PATH)
+
+        if os.path.exists("/usr/local/lib/python3.13/site-packages/employee_attrition_model/trained_models/employee_attrition_model.joblib"):
+            filepath = "/usr/local/lib/python3.13/site-packages/employee_attrition_model/trained_models/employee_attrition_model.joblib"
             
         # Add debug information
         print(f"Current working directory: {os.getcwd()}")
@@ -179,7 +182,7 @@ class ModelTrainer:
         
         if os.path.exists(filepath):
             loaded_model = joblib.load(filepath)
-            
+                     
             # Determine if it's a pipeline or just a model
             if isinstance(loaded_model, Pipeline):
                 self.pipeline = loaded_model
