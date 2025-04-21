@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "employee_attrition_predictor"
-version = "0.1.9"
+version = "0.1.10"
 description = "A model to predict employee attrition"
 authors = [
     {name = "Roopa Hegde", email = "roopa.hegde@gmail.com"},

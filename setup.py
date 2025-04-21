@@ -25,7 +25,7 @@ ROOT_DIR = Path(__file__).resolve().parent
 print(f"**Root directory:** {ROOT_DIR}")
 REQUIREMENTS_DIR = ROOT_DIR
 PACKAGE_DIR = ROOT_DIR / 'employee_attrition_model'
-about["__version__"] = "0.1.9"
+about["__version__"] = "0.1.10"
 
 
 # What packages are required for this module to be executed?

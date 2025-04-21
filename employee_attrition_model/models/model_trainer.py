@@ -170,10 +170,12 @@ class ModelTrainer:
             The loaded model.
         """
         if filepath is None:
-            filepath = MODEL_PATH
+            filepath = os.path.join('employee_attrition_model', MODEL_PATH)
             
-        # Print the filepath for debugging
-        print(f"Attempting to load model from: {filepath}")
+        # Add debug information
+        print(f"Current working directory: {os.getcwd()}")
+        print(f"Absolute path to model: {os.path.abspath(filepath)}")
+        print(f"Model path from config: {MODEL_PATH}")
         
         if os.path.exists(filepath):
             loaded_model = joblib.load(filepath)
@@ -192,7 +194,7 @@ class ModelTrainer:
     
     def predict(self, X):
         """
-        Make predictions on new data.
+        Make predictions on new data. Loads the model from MODEL_PATH if not already loaded.
         
         Args:
             X: Features to predict on.
@@ -205,6 +207,10 @@ class ModelTrainer:
         import pandas as pd
         
         try:
+            # Load model if not already loaded
+            if self.pipeline is None and self.model is None:
+                self.load_model()  # This will load from MODEL_PATH
+            
             # Validate input data
             if isinstance(X, dict):
                 # Single record as dictionary
@@ -228,10 +234,10 @@ class ModelTrainer:
             elif self.model is not None:
                 return self.model.predict(X_validated)
             else:
-                raise ValueError("Model has not been trained yet.")
+                raise ValueError("Failed to load model from MODEL_PATH")
                 
         except Exception as e:
-            raise ValueError(f"Prediction failed during data validation: {str(e)}")
+            raise ValueError(f"Prediction failed: {str(e)}")
     
     def predict_proba(self, X):
         """
