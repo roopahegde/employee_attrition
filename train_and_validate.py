@@ -66,7 +66,7 @@ def train_and_validate():
     print(f"Model saved to {model_path}")
     
     # 5. Visualize results
-    print("\n5. Generating visualizations...")
+    '''print("\n5. Generating visualizations...")
     
     # Confusion matrix
     plt.figure(figsize=(8, 6))
@@ -97,7 +97,7 @@ def train_and_validate():
         # Plot feature importance
         plot_feature_importance(xgb_model, feature_names[:len(xgb_model.feature_importances_)])
     except Exception as e:
-        print(f"Could not plot feature importance: {str(e)}")
+        print(f"Could not plot feature importance: {str(e)}")'''
     
     print("\n===== Model Training and Validation Complete =====")
     print(f"Model accuracy: {metrics['accuracy']:.4f}")
