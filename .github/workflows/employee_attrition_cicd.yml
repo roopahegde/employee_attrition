@@ -6,7 +6,7 @@ on:
 
 jobs:
   train_and_test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -53,7 +53,7 @@ jobs:
           
   build_and_push_docker:
     needs: train_and_test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
