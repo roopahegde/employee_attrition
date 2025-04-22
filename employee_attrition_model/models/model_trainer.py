@@ -171,9 +171,11 @@ class ModelTrainer:
         """
         if filepath is None:
             filepath = os.path.join('employee_attrition_model', MODEL_PATH)
+        sitepath = "/usr/local/lib/python3.13/site-packages/employee_attrition_model/trained_models/employee_attrition_model.joblib"
+        print(f"site path exist ??? --- {os.path.exists(sitepath)}")
 
-        if os.path.exists("/usr/local/lib/python3.13/site-packages/employee_attrition_model/trained_models/employee_attrition_model.joblib"):
-            filepath = "/usr/local/lib/python3.13/site-packages/employee_attrition_model/trained_models/employee_attrition_model.joblib"
+        if os.path.exists(sitepath):
+            filepath = sitepath
             
         # Add debug information
         print(f"Current working directory: {os.getcwd()}")
