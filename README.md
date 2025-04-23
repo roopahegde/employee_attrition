@@ -10,7 +10,6 @@ EMPLOYEE_ATTRITION/
 │   ├── app.py               # Flask API implementation 
 │   └── Dockerfile           # Docker container for API
 ├── data/                    # Data storage
-│   └── ...
 ├── dist/                    # Distribution files directory
 ├── employee_attrition_model/ # ML model package
 │   ├── __pycache__/
